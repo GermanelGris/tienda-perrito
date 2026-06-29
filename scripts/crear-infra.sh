@@ -7,7 +7,7 @@ AMI_ID="ami-0c7217cdde317cfec"
 INSTANCE_TYPE="t3.micro"
 
 echo "=== 1. Validando o Creando VPC ==="
-VPC_ID=$(aws ec2 describe-vpcs --filters "Name=tag:Name,Values=tienda-perritos-vpc-new" --query "Vpcs[0].VpcId" --output text)
+VPC_ID=$(aws ec2 describe-vpcs --filters "Name=tag:Name,Values=tienda-perrito-vpc" --query "Vpcs[0].VpcId" --output text)
 if [ "$VPC_ID" == "None" ] || [ -z "$VPC_ID" ]; then
   VPC_ID=$(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --query 'Vpc.VpcId' --output text)
   aws ec2 create-tags --resources $VPC_ID --tags Key=Name,Value=tienda-perritos-vpc-new
